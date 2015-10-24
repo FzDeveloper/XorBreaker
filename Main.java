@@ -5,6 +5,6 @@
 public class Main {
     public static void main(String[] args){
         ReadIt uruchom= new ReadIt();//proba z podwojna autoryzacja
-
+        uruchom.readit();
     }
 }
