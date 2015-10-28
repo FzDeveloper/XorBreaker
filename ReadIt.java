@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class ReadIt {
 
-    String signs="aąbcćdeęfghijklłmnńoóprsśtuwyzżźABCĆDEFGHIJKLŁMNOPRSŚTUWYZŻŹ0123456789-,.()!? ";
     String space=" ";
     String krypt0="11100110 01011000 10100111 11111000 01110110 10010001 00100101 11101101 11111110 10010011 10100111 01000011 10000000 10001111 00000110 10110001 01000101 11000000 00100001 10111101 10011101 01101000 00110110 00000100 00111001 01010011 01100011 10001010 00100001 11111011 10011100 11010011 00001101 10001101 10111110 10000010 00011101 00010000 11100010 11000000 00010000 00101001 11000111 10011000 10101101 00001111 11101101 10011011 01111100 11110111 10110001 00100000 01000110 10000000 00001001 00101111 00001111 00110011 11001111 11111001 10101000 11101110 01110101 11001101 11100110 00110011 00001011 11000010 01011000 00001010 10101010 00000111 01001001 10111000 10111000 11000110 00000111 00000011 11110001 11111111 11111101 01010011 01111111 00000100 00001000 01010000 10111010 10010100 01101110 10100011 11001011 11001111 10011110 00010100 10001000 00101101 10110001 00001100 11000001 00010011 00010111 10101101 11100111";
     //String krypt1="00000010";
@@ -22,41 +21,62 @@ public class ReadIt {
     String[] cripts={krypt1, krypt2,krypt3,krypt4,krypt5,krypt6};
     char[] signs2;
 
+    public void toChars(String strips){
+        System.out.print("\n");
+        String symbols=strips;
+        //ArrayList<String> firstsValues= new ArrayList<>();
+        String[] afterSplit=symbols.split(space);
+
+        //for(int i=0;i<strips.size();i++){//wrzucenie dostepnych znakow to tablicy charow
+        //afterSplit =stringToChars.split(space);
+        //}
+        System.out.print(afterSplit[0]);
+        return ;
+    }
+
     public void readit(){
-        for(int i=0;i<signs.length();i++){//wrzucenie dostepnych znakow to tablicy charow
-            signs2= signs.toCharArray();
-        }
-        List<Integer> listOfChars= new ArrayList<>();
+        Integer[] listOfChars= new Integer[78];
         int valuesOfChars;
-        for(int convert=0;convert<signs2.length;convert++){//zamiana dostepnych znakow na liczby i wrzucenie ich do Listy
-            valuesOfChars=(int) signs2[convert];
-            listOfChars.add(valuesOfChars);
-        }
+        /*for(int convert=0;convert<signs2.length;convert++){//zamiana dostepnych znakow na liczby i wrzucenie ich do Listy
+            valuesOfChars=(int)(signs2[convert]);
+            listOfChars[convert]=valuesOfChars;
+            valuesOfChars=0;
+            //System.out.print(listOfChars[convert]+"\n");
+        }*/
         String[] toBreak=krypt0.split(space);
-        String[] krypto;
+        String[] krypto;//=krypt4.split(space);
         int isInString;
-        int valueOfChar;
         int valueOfBinary;
         String firstString=" ";
+
         List<String> secondString= new ArrayList<>();
-        try {
-            krypto = cripts[0].split(space);
-            for (int j = 0; j < (toBreak.length); j++) {//sprawdzam tylko do dlugosci rownej kryptogramowi do zlamania
-                for(int signsCount=0; signsCount<signs2.length;signsCount++){
-                    valueOfChar = (int) signs2[signsCount];
-                    valueOfBinary = Integer.parseInt(krypto[j], 2);
-                    isInString=valueOfBinary^valueOfChar;
-                    for(int xd=0;xd<signs2.length;xd++){
-                    if(Arrays.asList(isInString).contains(listOfChars.get(xd))){
-                        firstString=firstString+signs2[signsCount];
-                    }}
-                    secondString.add(firstString);//to chyba wrzuca możliwe kombinacje dla znakow na kzadej pozycji do listy
-                    //System.out.print((valueOfBinary ^ valueOfChar) + " " + "\n");
-                    System.out.print(secondString+"\n");
+        try {//sprawdzaniue pierwszego znaku w danych kryptogramach
+            String[] nieLecWKulki=new String[255];
+            //for (int j = 0; j < 6;j++){ //(toBreak.length); j++) {//sprawdzam tylko do dlugosci rownej kryptogramowi do zlamania
+                krypto = cripts[0].split(space);
+                valueOfBinary = Integer.parseInt(krypto[0], 2);
+
+                firstString=" ";
+                for(int signsCount=32; signsCount<97;signsCount++) {
+                    isInString = valueOfBinary ^ signsCount;
+                    //for(int xd=0;xd<signs2.length;xd++){
+                    //if (Arrays.asList(listOfChars).contains(isInString)) {
+                      //  firstString = firstString + signs2[signsCount];
+                    //}
+                    //}
+                    if(isInString>=1&&isInString<=255){
+                        firstString=firstString+" "+isInString;
+                    }
+
                 }
+                //toChars(firstString);
+            nieLecWKulki=firstString.split(space);
 
-            }
+                    //secondString.add(firstString);//to chyba wrzuca możliwe kombinacje dla znakow na kzadej pozycji do listy
 
+                System.out.print(nieLecWKulki[0]+"\n");
+            //}
+            //toChars(secondString);
         }catch(ArrayIndexOutOfBoundsException ex){
 
         }
